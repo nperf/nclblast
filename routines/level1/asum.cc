@@ -18,7 +18,7 @@ void dasum(const v8::FunctionCallbackInfo<v8::Value>& info) {
   cl_command_queue queue = clCreateCommandQueue(ctx, device, 0, &error);
 
   int n = info[0]->Uint32Value();
-  void *x_data = info[1].As<v8::Float64Array>()->Buffer()->GetContents().Data();
+  cl_double *x_data = reinterpret_cast<cl_double*>(info[1].As<v8::Float64Array>()->Buffer()->GetContents().Data());
   int inc_x = info[2]->Uint32Value();
 
   cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_double), NULL, &error),
@@ -62,7 +62,7 @@ void sasum(const v8::FunctionCallbackInfo<v8::Value>& info) {
   cl_command_queue queue = clCreateCommandQueue(ctx, device, 0, &error);
 
   int n = info[0]->Uint32Value();
-  void *x_data = info[1].As<v8::Float32Array>()->Buffer()->GetContents().Data();
+  cl_float *x_data = reinterpret_cast<cl_float*>(info[1].As<v8::Float32Array>()->Buffer()->GetContents().Data());
   int inc_x = info[2]->Uint32Value();
 
   cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_float), NULL, &error),
