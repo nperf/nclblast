@@ -10,4 +10,7 @@
 
   addon.saxpy(3, 1, x, 1, y, 1);
   console.log(y);
+
+  addon.scopy(3, y, 1, x, 1);
+  console.log(x);
 }());

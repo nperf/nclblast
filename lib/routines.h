@@ -17,5 +17,7 @@ void dasum(const v8::FunctionCallbackInfo<v8::Value>& info);
 void sasum(const v8::FunctionCallbackInfo<v8::Value>& info);
 void daxpy(const v8::FunctionCallbackInfo<v8::Value>& info);
 void saxpy(const v8::FunctionCallbackInfo<v8::Value>& info);
+void dcopy(const v8::FunctionCallbackInfo<v8::Value>& info);
+void scopy(const v8::FunctionCallbackInfo<v8::Value>& info);
 
 #endif
