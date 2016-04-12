@@ -6,7 +6,8 @@
                 'addon.cc',
                 'routines/level1/asum.cc',
                 'routines/level1/axpy.cc',
-                'routines/level1/copy.cc'
+                'routines/level1/copy.cc',
+                'routines/level1/dot.cc'
             ],
             'include_dirs': [
                 'lib'

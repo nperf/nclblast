@@ -8,6 +8,8 @@ void Init(v8::Local<v8::Object> exports) {
   NODE_SET_METHOD(exports, "saxpy", saxpy);
   NODE_SET_METHOD(exports, "dcopy", dcopy);
   NODE_SET_METHOD(exports, "scopy", scopy);
+  NODE_SET_METHOD(exports, "ddot", ddot);
+  NODE_SET_METHOD(exports, "sdot", sdot);
 }
 
 NODE_MODULE(addon, Init)

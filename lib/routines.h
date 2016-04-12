@@ -19,5 +19,7 @@ void daxpy(const v8::FunctionCallbackInfo<v8::Value>& info);
 void saxpy(const v8::FunctionCallbackInfo<v8::Value>& info);
 void dcopy(const v8::FunctionCallbackInfo<v8::Value>& info);
 void scopy(const v8::FunctionCallbackInfo<v8::Value>& info);
+void ddot(const v8::FunctionCallbackInfo<v8::Value>& info);
+void sdot(const v8::FunctionCallbackInfo<v8::Value>& info);
 
 #endif
