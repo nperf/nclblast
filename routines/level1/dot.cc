@@ -40,6 +40,8 @@ void ddot(const v8::FunctionCallbackInfo<v8::Value>& info) {
   clReleaseEvent(event);
   clReleaseMemObject(x);
   clReleaseMemObject(y);
+  clReleaseMemObject(container);
+  clReleaseMemObject(scratch);
   clReleaseCommandQueue(queue);
   clReleaseContext(ctx);
   clblasTeardown();
