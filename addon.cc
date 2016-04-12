@@ -10,6 +10,8 @@ void Init(v8::Local<v8::Object> exports) {
   NODE_SET_METHOD(exports, "scopy", scopy);
   NODE_SET_METHOD(exports, "ddot", ddot);
   NODE_SET_METHOD(exports, "sdot", sdot);
+  NODE_SET_METHOD(exports, "idamax", idamax);
+  NODE_SET_METHOD(exports, "isamax", isamax);
 }
 
 NODE_MODULE(addon, Init)

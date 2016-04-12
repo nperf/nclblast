@@ -21,5 +21,7 @@ void dcopy(const v8::FunctionCallbackInfo<v8::Value>& info);
 void scopy(const v8::FunctionCallbackInfo<v8::Value>& info);
 void ddot(const v8::FunctionCallbackInfo<v8::Value>& info);
 void sdot(const v8::FunctionCallbackInfo<v8::Value>& info);
+void idamax(const v8::FunctionCallbackInfo<v8::Value>& info);
+void isamax(const v8::FunctionCallbackInfo<v8::Value>& info);
 
 #endif

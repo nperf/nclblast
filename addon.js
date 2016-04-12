@@ -17,4 +17,5 @@
   console.log(x);
 
   console.log(addon.sdot(3, x, 1, y, 1));
+  console.log(addon.isamax(3, x, 1));
 }());
