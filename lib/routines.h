@@ -8,7 +8,7 @@
 do { \
   cl_int error = call; \
   if (error != CL_SUCCESS) { \
-    fprintf(stderr, "CL error in file '%s' on line '%d'", __FILE__, __LINE__); \
+    fprintf(stderr, "CL error %d in file '%s' on line '%d'", error, __FILE__, __LINE__); \
     exit(1); \
   } \
 } while (0)
