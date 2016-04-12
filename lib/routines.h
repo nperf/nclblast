@@ -23,5 +23,7 @@ void ddot(const v8::FunctionCallbackInfo<v8::Value>& info);
 void sdot(const v8::FunctionCallbackInfo<v8::Value>& info);
 void idamax(const v8::FunctionCallbackInfo<v8::Value>& info);
 void isamax(const v8::FunctionCallbackInfo<v8::Value>& info);
+void dnrm2(const v8::FunctionCallbackInfo<v8::Value>& info);
+void snrm2(const v8::FunctionCallbackInfo<v8::Value>& info);
 
 #endif

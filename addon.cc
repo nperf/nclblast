@@ -12,6 +12,8 @@ void Init(v8::Local<v8::Object> exports) {
   NODE_SET_METHOD(exports, "sdot", sdot);
   NODE_SET_METHOD(exports, "idamax", idamax);
   NODE_SET_METHOD(exports, "isamax", isamax);
+  NODE_SET_METHOD(exports, "dnrm2", dnrm2);
+  NODE_SET_METHOD(exports, "snrm2", snrm2);
 }
 
 NODE_MODULE(addon, Init)
