@@ -1,0 +1,21 @@
+{
+  "name": "nclblas",
+  "version": "0.1.0",
+  "description": "Node C++ bindings to clBLAS",
+  "main": "addon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mateogianolio/nclblas.git"
+  },
+  "author": "Mateo Gianolio",
+  "license": "MIT",
+  "gypfile": true,
+  "bugs": {
+    "url": "https://github.com/mateogianolio/nclblas/issues"
+  },
+  "homepage": "https://github.com/mateogianolio/nclblas#readme"
+}
