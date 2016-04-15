@@ -5,11 +5,13 @@
 #include <clBLAS.h>
 
 #define SAFE(call) \
+do { \
   cl_int error = call; \
   if (error != CL_SUCCESS) { \
     fprintf(stderr, "CL error %d in file '%s' on line '%d'", error, __FILE__, __LINE__); \
     exit(EXIT_FAILURE); \
-  }
+  } \
+} while (0)
 
 void dasum(const v8::FunctionCallbackInfo<v8::Value>& info);
 void sasum(const v8::FunctionCallbackInfo<v8::Value>& info);

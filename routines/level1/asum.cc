@@ -21,11 +21,11 @@ void dasum(const v8::FunctionCallbackInfo<v8::Value>& info) {
   void *x_data = info[1].As<v8::Float64Array>()->Buffer()->GetContents().Data();
   int inc_x = info[2]->Uint32Value();
 
+  SAFE(clblasSetup());
   cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_double), NULL, &error),
           container = clCreateBuffer(ctx, CL_MEM_WRITE_ONLY, sizeof(cl_double), NULL, &error),
           scratch = clCreateBuffer(ctx, CL_MEM_READ_WRITE, n * sizeof(cl_double), NULL, &error);
 
-  SAFE(clblasSetup());
   SAFE(clEnqueueWriteBuffer(queue, x, CL_TRUE, 0, n * sizeof(cl_double), x_data, 0, NULL, NULL));
   SAFE(clblasDasum(n, container, 0, x, 0, inc_x, scratch, 1, &queue, 0, NULL, &event));
   SAFE(clWaitForEvents(1, &event));
@@ -37,9 +37,10 @@ void dasum(const v8::FunctionCallbackInfo<v8::Value>& info) {
   clReleaseMemObject(x);
   clReleaseMemObject(container);
   clReleaseMemObject(scratch);
+  clblasTeardown();
+
   clReleaseCommandQueue(queue);
   clReleaseContext(ctx);
-  clblasTeardown();
 
   info.GetReturnValue().Set(v8::Number::New(info.GetIsolate(), result));
 }
@@ -60,16 +61,16 @@ void sasum(const v8::FunctionCallbackInfo<v8::Value>& info) {
   };
   cl_context ctx = clCreateContext(props, 1, &device, NULL, NULL, &error);
   cl_command_queue queue = clCreateCommandQueue(ctx, device, 0, &error);
-
+  
   int n = info[0]->Uint32Value();
   void *x_data = info[1].As<v8::Float32Array>()->Buffer()->GetContents().Data();
   int inc_x = info[2]->Uint32Value();
 
+  SAFE(clblasSetup());
   cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_float), NULL, &error),
           container = clCreateBuffer(ctx, CL_MEM_WRITE_ONLY, sizeof(cl_float), NULL, &error),
           scratch = clCreateBuffer(ctx, CL_MEM_READ_WRITE, n * sizeof(cl_float), NULL, &error);
 
-  SAFE(clblasSetup());
   SAFE(clEnqueueWriteBuffer(queue, x, CL_TRUE, 0, n * sizeof(cl_float), x_data, 0, NULL, NULL));
   SAFE(clblasSasum(n, container, 0, x, 0, inc_x, scratch, 1, &queue, 0, NULL, &event));
   SAFE(clWaitForEvents(1, &event));
@@ -81,9 +82,10 @@ void sasum(const v8::FunctionCallbackInfo<v8::Value>& info) {
   clReleaseMemObject(x);
   clReleaseMemObject(container);
   clReleaseMemObject(scratch);
+  clblasTeardown();
+
   clReleaseCommandQueue(queue);
   clReleaseContext(ctx);
-  clblasTeardown();
 
   info.GetReturnValue().Set(v8::Number::New(info.GetIsolate(), result));
 }

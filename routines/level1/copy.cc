@@ -23,10 +23,10 @@ void dcopy(const v8::FunctionCallbackInfo<v8::Value>& info) {
   void *y_data = info[3].As<v8::Float64Array>()->Buffer()->GetContents().Data();
   int inc_y = info[4]->Uint32Value();
 
+  SAFE(clblasSetup());
   cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_double), NULL, &error),
           y = clCreateBuffer(ctx, CL_MEM_READ_WRITE, n * sizeof(cl_double), NULL, &error);
 
-  SAFE(clblasSetup());
   SAFE(clEnqueueWriteBuffer(queue, x, CL_TRUE, 0, n * sizeof(cl_double), x_data, 0, NULL, NULL));
   SAFE(clEnqueueWriteBuffer(queue, y, CL_TRUE, 0, n * sizeof(cl_double), y_data, 0, NULL, NULL));
   SAFE(clblasDcopy(n, x, 0, inc_x, y, 0, inc_y, 1, &queue, 0, NULL, &event));
@@ -36,9 +36,10 @@ void dcopy(const v8::FunctionCallbackInfo<v8::Value>& info) {
   clReleaseEvent(event);
   clReleaseMemObject(x);
   clReleaseMemObject(y);
+  clblasTeardown();
+
   clReleaseCommandQueue(queue);
   clReleaseContext(ctx);
-  clblasTeardown();
 }
 
 void scopy(const v8::FunctionCallbackInfo<v8::Value>& info) {
@@ -64,10 +65,10 @@ void scopy(const v8::FunctionCallbackInfo<v8::Value>& info) {
   void *y_data = info[3].As<v8::Float32Array>()->Buffer()->GetContents().Data();
   int inc_y = info[4]->Uint32Value();
 
+  SAFE(clblasSetup());
   cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_float), NULL, &error),
           y = clCreateBuffer(ctx, CL_MEM_READ_WRITE, n * sizeof(cl_float), NULL, &error);
 
-  SAFE(clblasSetup());
   SAFE(clEnqueueWriteBuffer(queue, x, CL_TRUE, 0, n * sizeof(cl_float), x_data, 0, NULL, NULL));
   SAFE(clEnqueueWriteBuffer(queue, y, CL_TRUE, 0, n * sizeof(cl_float), y_data, 0, NULL, NULL));
   SAFE(clblasScopy(n, x, 0, inc_x, y, 0, inc_y, 1, &queue, 0, NULL, &event));
@@ -77,7 +78,8 @@ void scopy(const v8::FunctionCallbackInfo<v8::Value>& info) {
   clReleaseEvent(event);
   clReleaseMemObject(x);
   clReleaseMemObject(y);
+  clblasTeardown();
+
   clReleaseCommandQueue(queue);
   clReleaseContext(ctx);
-  clblasTeardown();
 }
