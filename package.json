@@ -1,21 +1,47 @@
 {
   "name": "nclblas",
-  "version": "0.1.0",
-  "description": "Node C++ bindings to clBLAS",
-  "main": "addon.js",
+  "version": "1.0.0",
+  "description": "C++ bindings for all single- and double-precision CLBlast routines.",
+  "main": "built/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "node-gyp configure rebuild"
+    "test": "nyc mocha -r ts-node/register ./src/*.spec.ts",
+    "lint": "tslint -p . -c tslint.json 'src/*.ts'",
+    "docs": "typedoc --out docs --exclude \"**/*+(.spec).ts\" --target es6 src && touch docs/.nojekyll",
+    "build": "node-gyp rebuild && tsc",
+    "install": "npm run build"
+  },
+  "nyc": {
+    "extension": [
+      ".ts",
+      ".tsx"
+    ],
+    "exclude": [
+      "**/*.d.ts",
+      "built/**",
+      "docs/**",
+      "coverage/**",
+      "src/*.spec.ts",
+      "src/index.cc"
+    ],
+    "reporter": [
+      "lcov"
+    ],
+    "all": true
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mateogianolio/nclblas.git"
+    "git": "https://github.com/mateogianolio/nblas"
+  },
+  "devDependencies": {
+    "@types/mocha": "^5.2.6",
+    "@types/node": "^11.11.3",
+    "mocha": "^6.0.2",
+    "nyc": "^13.3.0",
+    "ts-node": "^8.0.3",
+    "tslint": "^5.14.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.3.3333"
   },
   "author": "Mateo Gianolio",
   "license": "MIT",
-  "gypfile": true,
-  "bugs": {
-    "url": "https://github.com/mateogianolio/nclblas/issues"
-  },
-  "homepage": "https://github.com/mateogianolio/nclblas#readme"
+  "gypfile": true
 }

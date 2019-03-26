@@ -1,91 +1,38 @@
+
 #include "routines.h"
 
 void idamax(const v8::FunctionCallbackInfo<v8::Value>& info) {
-  cl_int error;
-  cl_event event;
-  cl_platform_id platform;
-  cl_device_id device;
-
-  SAFE(clGetPlatformIDs(1, &platform, NULL));
-  SAFE(clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, &device, NULL));
-
-  cl_context_properties props[3] = {
-    (cl_context_properties) CL_CONTEXT_PLATFORM,
-    (cl_context_properties) platform,
-    0
-  };
-  cl_context ctx = clCreateContext(props, 1, &device, NULL, NULL, &error);
-  cl_command_queue queue = clCreateCommandQueue(ctx, device, 0, &error);
-
-  int n = info[0]->Uint32Value();
-  void *x_data = info[1].As<v8::Float64Array>()->Buffer()->GetContents().Data();
-  int inc_x = info[2]->Uint32Value();
-
-  SAFE(clblasSetup());
-  cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_double), NULL, &error),
-          container = clCreateBuffer(ctx, CL_MEM_WRITE_ONLY, sizeof(cl_uint), NULL, &error),
-          scratch = clCreateBuffer(ctx, CL_MEM_READ_WRITE, 2 * n * sizeof(cl_double), NULL, &error);
-
-  SAFE(clEnqueueWriteBuffer(queue, x, CL_TRUE, 0, n * sizeof(cl_double), x_data, 0, NULL, NULL));
-  SAFE(clblasiDamax(n, container, 0, x, 0, inc_x, scratch, 1, &queue, 0, NULL, &event));
-  SAFE(clWaitForEvents(1, &event));
-
-  cl_uint result;
-  SAFE(clEnqueueReadBuffer(queue, container, CL_TRUE, 0, sizeof(cl_uint), &result, 0, NULL, NULL));
-
-  clReleaseEvent(event);
-  clReleaseMemObject(x);
-  clReleaseMemObject(container);
-  clReleaseMemObject(scratch);
-  clblasTeardown();
-
-  clReleaseCommandQueue(queue);
-  clReleaseContext(ctx);
-
-  info.GetReturnValue().Set(v8::Number::New(info.GetIsolate(), result));
+	const int n = info[0]->Uint32Value();
+	const double *x = reinterpret_cast<double*>(GET_CONTENTS(info[1].As<v8::Float64Array>()));
+	const int inc_x = info[2]->Uint32Value();
+	info.GetReturnValue().Set(
+		v8::Number::New(info.GetIsolate(), cblas_idamax(n, x, inc_x))
+	);
 }
 
 void isamax(const v8::FunctionCallbackInfo<v8::Value>& info) {
-  cl_int error;
-  cl_event event;
-  cl_platform_id platform;
-  cl_device_id device;
+	const int n = info[0]->Uint32Value();
+	const float *x = reinterpret_cast<float*>(GET_CONTENTS(info[1].As<v8::Float32Array>()));
+	const int inc_x = info[2]->Uint32Value();
+	info.GetReturnValue().Set(
+		v8::Number::New(info.GetIsolate(), cblas_isamax(n, x, inc_x))
+	);
+}
 
-  SAFE(clGetPlatformIDs(1, &platform, NULL));
-  SAFE(clGetDeviceIDs(platform, CL_DEVICE_TYPE_GPU, 1, &device, NULL));
+void izamax(const v8::FunctionCallbackInfo<v8::Value>& info) {
+	const int n = info[0]->Uint32Value();
+	const double *x = reinterpret_cast<double*>(GET_CONTENTS(info[1].As<v8::Float64Array>()));
+	const int inc_x = info[2]->Uint32Value();
+	info.GetReturnValue().Set(
+		v8::Number::New(info.GetIsolate(), cblas_izamax(n, x, inc_x))
+	);
+}
 
-  cl_context_properties props[3] = {
-    (cl_context_properties) CL_CONTEXT_PLATFORM,
-    (cl_context_properties) platform,
-    0
-  };
-  cl_context ctx = clCreateContext(props, 1, &device, NULL, NULL, &error);
-  cl_command_queue queue = clCreateCommandQueue(ctx, device, 0, &error);
-
-  int n = info[0]->Uint32Value();
-  void *x_data = info[1].As<v8::Float32Array>()->Buffer()->GetContents().Data();
-  int inc_x = info[2]->Uint32Value();
-
-  SAFE(clblasSetup());
-  cl_mem  x = clCreateBuffer(ctx, CL_MEM_READ_ONLY, n * sizeof(cl_float), NULL, &error),
-          container = clCreateBuffer(ctx, CL_MEM_WRITE_ONLY, sizeof(cl_uint), NULL, &error),
-          scratch = clCreateBuffer(ctx, CL_MEM_READ_WRITE, 2 * n * sizeof(cl_float), NULL, &error);
-
-  SAFE(clEnqueueWriteBuffer(queue, x, CL_TRUE, 0, n * sizeof(cl_float), x_data, 0, NULL, NULL));
-  SAFE(clblasiSamax(n, container, 0, x, 0, inc_x, scratch, 1, &queue, 0, NULL, &event));
-  SAFE(clWaitForEvents(1, &event));
-
-  cl_uint result;
-  SAFE(clEnqueueReadBuffer(queue, container, CL_TRUE, 0, sizeof(cl_uint), &result, 0, NULL, NULL));
-
-  clReleaseEvent(event);
-  clReleaseMemObject(x);
-  clReleaseMemObject(container);
-  clReleaseMemObject(scratch);
-  clblasTeardown();
-  
-  clReleaseCommandQueue(queue);
-  clReleaseContext(ctx);
-
-  info.GetReturnValue().Set(v8::Number::New(info.GetIsolate(), result));
+void icamax(const v8::FunctionCallbackInfo<v8::Value>& info) {
+	const int n = info[0]->Uint32Value();
+	const float *x = reinterpret_cast<float*>(GET_CONTENTS(info[1].As<v8::Float32Array>()));
+	const int inc_x = info[2]->Uint32Value();
+	info.GetReturnValue().Set(
+		v8::Number::New(info.GetIsolate(), cblas_icamax(n, x, inc_x))
+	);
 }

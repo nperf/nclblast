@@ -1,0 +1,30 @@
+language: node_js
+node_js:
+  - "6.9.0"
+before_install:
+  - sudo add-apt-repository ppa:cnugteren/clblast
+  - sudo apt-get update
+  - sudo apt-get install libclblast-dev
+
+env:
+  global:
+    - CXX=g++-4.8
+    - CC_TEST_REPORTER_ID=eb4d2686b8fe4e1a5217d16d01c697120c46ef9dab2434501cfc8748aa4c4cf4
+before_script:
+  - npm install -g nyc
+  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+  - chmod +x ./cc-test-reporter
+  - ./cc-test-reporter before-build
+script:
+  - npm run lint
+  - npm test
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    packages:
+    - gcc-4.8
+    - g++-4.8
+    - clang
