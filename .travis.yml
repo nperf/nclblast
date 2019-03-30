@@ -3,10 +3,9 @@ language: node_js
 node_js:
   - "6.9.0"
 before_install:
-  - sudo add-apt-repository -y ppa:cnugteren/clblast
-  - sudo apt-get update
-  - sudo apt-get install -y libclblast-dev
-
+  - wget https://github.com/CNugteren/CLBlast/releases/download/1.5.0/CLBlast-1.5.0-Linux-x64.tar.gz
+  - tar -xzvf CLBlast-1.5.0-Linux-x64.tar.gz
+  - pushd CLBlast-1.5.0-Linux-x64 && cmake . && make && sudo make install && popd
 env:
   global:
     - CXX=g++-4.8
