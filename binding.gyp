@@ -1,7 +1,7 @@
 {
   "targets": [
     {
-      "target_name": "nblas",
+      "target_name": "nclblast",
       "sources": [
         "src/index.cc",
         "routines/level1/asum.cc",

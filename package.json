@@ -1,5 +1,5 @@
 {
-  "name": "nclblas",
+  "name": "nclblast",
   "version": "1.0.0",
   "description": "C++ bindings for all single- and double-precision CLBlast routines.",
   "main": "built/index.js",
@@ -29,7 +29,7 @@
     "all": true
   },
   "repository": {
-    "git": "https://github.com/mateogianolio/nblas"
+    "git": "https://github.com/nperf/nclblast"
   },
   "devDependencies": {
     "@types/mocha": "^5.2.6",
