@@ -2,6 +2,11 @@ dist: xenial
 language: node_js
 node_js:
   - "6.9.0"
+before_install:
+  - sudo add-apt-repository -y ppa:cnugteren/clblast
+  - sudo apt-get update
+  - sudo apt-get install -y libclblast-dev
+
 env:
   global:
     - CXX=g++-4.8
@@ -19,8 +24,8 @@ after_script:
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
-      - ppa:cnugteren/clblast
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
-      - libclblast-dev
+    - gcc-4.8
+    - g++-4.8
+    - clang
