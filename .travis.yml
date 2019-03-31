@@ -30,12 +30,9 @@ install:
   - popd;
   - git clone --depth 1 https://github.com/CNugteren/CLBlast.git
   - pushd CLBlast;
-  - mkdir build;
-  - pushd build;
-  - cmake ..;
+  - cmake . -DNETLIB=ON -DNETLIB_PERSISTENT_OPENCL=ON;
   - make;
   - sudo make install;
-  - popd;
   - popd;
 env:
   global:
