@@ -44,7 +44,6 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - npm install
   - npm run lint
   - npm test
 after_script:

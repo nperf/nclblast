@@ -3,7 +3,7 @@ export declare type MatrixTrans = 111 | 112 | 113;
 export declare type MatrixUpperLower = 121 | 122;
 export declare type MatrixUnit = 131 | 132;
 export declare type MatrixLeftRight = 141 | 142;
-export interface INBlas {
+export interface INCLBlast {
     [key: string]: any;
     dasum(n: number, x: Float64Array, incx: number): number;
     sasum(n: number, x: Float32Array, incx: number): number;
