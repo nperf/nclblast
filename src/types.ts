@@ -4,7 +4,7 @@ export type MatrixUpperLower = 121 | 122;
 export type MatrixUnit = 131 | 132;
 export type MatrixLeftRight = 141 | 142;
 
-export interface INBlas {
+export interface INCLBlast {
   [key: string]: any;
 
   dasum(n: number, x: Float64Array, incx: number): number;
