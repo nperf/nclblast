@@ -30,7 +30,7 @@ install:
   - popd;
   - git clone --depth 1 https://github.com/CNugteren/CLBlast.git
   - pushd CLBlast;
-  - cmake . -DNETLIB=ON -DNETLIB_PERSISTENT_OPENCL=ON;
+  - cmake . -DNETLIB=ON -DNETLIB_PERSISTENT_OPENCL=ON -DTUNERS=OFF;
   - make;
   - sudo make install;
   - popd;
@@ -44,6 +44,7 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
+  - npm install
   - npm run lint
   - npm test
 after_script:
