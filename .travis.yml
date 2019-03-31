@@ -14,7 +14,7 @@ install:
   - travis_retry git clone --depth 1 https://github.com/KhronosGroup/OpenCL-Headers.git inc/CL_headers_repo;
   - pushd inc;
   - mkdir CL;
-  - cp CL_headers_repo/opencl22/CL/* CL/;
+  - cp CL_headers_repo/CL/* CL/;
   - popd;
   - mkdir -p lib;
   - pushd lib;
