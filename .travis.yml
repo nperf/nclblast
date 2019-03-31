@@ -6,7 +6,6 @@ before_install:
   - export OPENCL_ROOT="${TRAVIS_BUILD_DIR}/opencl-headers";
   - wget https://github.com/CNugteren/CLBlast/archive/1.5.0.tar.gz
   - tar -xzvf 1.5.0.tar.gz
-  - cd CLBlast-1.5.0 && cmake . && make && sudo make install && cd ..
 install:
   - mkdir -p ${OPENCL_ROOT};
   - pushd ${OPENCL_ROOT};
