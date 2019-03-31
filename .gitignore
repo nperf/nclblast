@@ -1,5 +1,7 @@
-build
+.nyc_output
 node_modules
 coverage
-.nyc_output
+.DS_Store
+built
+build
 .vscode
