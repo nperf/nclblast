@@ -24,7 +24,7 @@ install:
   - popd;
   - pushd inc/CL;
   - rm -rf *;
-  - cp -r ../CL_headers_repo/opencl12/CL/* .;
+  - cp -r ../CL_headers_repo/CL/* .;
   - popd;
   - sudo cp -r inc/CL /usr/local/include/;
   - popd;
