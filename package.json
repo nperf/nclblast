@@ -32,7 +32,7 @@
     "git": "https://github.com/nperf/nclblast"
   },
   "devDependencies": {
-    "@types/mocha": "^5.2.6",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^11.11.3",
     "mocha": "^6.0.2",
     "nyc": "^13.3.0",
